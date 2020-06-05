@@ -10,3 +10,6 @@ console.log('income: ', typeof income);
 console.log('deposit: ', typeof deposit);
 
 console.log('Length addExpenses: ', addExpenses.length);
+
+console.log('\"Период равен ' + period + ' месяцев\"');
+console.log('\"Цель заработать ' + mission + ' рублей/долларов/гривен/юани\"');
