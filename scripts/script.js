@@ -13,3 +13,7 @@ console.log('Length addExpenses: ', addExpenses.length);
 
 console.log('\"Период равен ' + period + ' месяцев\"');
 console.log('\"Цель заработать ' + mission + ' рублей/долларов/гривен/юани\"');
+
+let lowerCase = (addExpenses.toLowerCase());
+let arr = lowerCase.split(', ');
+console.log('arr: ', arr);
