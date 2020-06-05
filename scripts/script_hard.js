@@ -7,3 +7,5 @@ for (let i = 0; i < num.length; i++) {
 }
 
 console.log('result: ', result);
+
+result = result ** 3;
