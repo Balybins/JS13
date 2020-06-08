@@ -8,12 +8,12 @@ arrEn = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Su
 lang = prompt('Введите язык \"ru\" или \"en\"');
 
 if (lang === 'ru') {
-    for (let i = 0; i < 7; i++) {
-        console.log(arrRu[i]);
+    for (let days of arrRu){
+        console.log(days);
     }
 } else if (lang === 'en') {
-    for (let i = 0; i < 7; i++) {
-        console.log(arrEn[i]);
+    for (let days of arrEn){
+        console.log(days);
     }
 } else {
     console.log('Вы ввели не верный язык, либо он не поддерживается!');
