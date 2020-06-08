@@ -58,8 +58,17 @@ for (let days of newArr2[arrLang]){
     console.log(days);
 }
 
-console.warn('Дни недели из объекта:');
 let result = newArr[lang];
-for (let days of result){
-    console.log(days);
+if (result){
+    console.warn('Дни недели из объекта:');
+    for (let days of result){
+        console.log(days);
+    }
 }
+
+
+namePerson = prompt('Введите имя');
+
+console.warn('Вывод должности по имени:');
+let person = (namePerson === 'Артем') ? 'директор' : (namePerson === 'Максим') ? 'преподаватель' : 'студент';
+console.log(namePerson, ': ', person);
