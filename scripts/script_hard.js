@@ -1,20 +1,37 @@
 'use strict'
 
-let lang, arrRu, arrEn, namePerson;
+let lang, ru, en, newArr, newArr2, namePerson;
 
-arrRu = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-arrEn = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+ru = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+en = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-lang = prompt('Введите язык \"ru\" или \"en\"');
+lang = (prompt('Введите язык \"ru\" или \"en\"')).toLowerCase();
 
+console.log('if...else:');
 if (lang === 'ru') {
-    for (let days of arrRu){
+    for (let days of ru){
         console.log(days);
     }
 } else if (lang === 'en') {
-    for (let days of arrEn){
+    for (let days of en){
         console.log(days);
     }
 } else {
     console.log('Вы ввели не верный язык, либо он не поддерживается!');
+}
+
+console.log('switch:');
+switch (lang){
+    case 'ru':
+        for (let days of ru){
+            console.log(days);
+        }
+        break;
+    case 'en':
+        for (let days of en){
+            console.log(days);
+        }
+        break;
+    default:
+        console.log('Вы ввели не верный язык, либо он не поддерживается!');
 }
