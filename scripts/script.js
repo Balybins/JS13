@@ -1,5 +1,6 @@
 'use strict';
 
+// Функция проверки данных, что это число
 let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -11,6 +12,7 @@ let money,
     mission = 10000000,
     expenses = [];
 
+// Функция получения данных о месячном доходе, с проверкой на то что введеные данные - число!
 let start = function() {
     do {
         money = prompt('Ваш месячный доход');
