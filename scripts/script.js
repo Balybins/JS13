@@ -1,17 +1,11 @@
 'use strict';
 
-let money = 70000,
+let money = +prompt('Ваш месячный доход', 70000),
     income = 'Разведение кроликов',
-    addExpenses = 'Казино, блекджек, кролики',
-    deposit = true,
+    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Еда, ЖКХ, Интернет'),
+    deposit = confirm('Есть ли у вас депозит в банке?'),
     mission = 10000000,
-    period = 6;
-
-money = +prompt('Ваш месячный доход', 70000);
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Еда, ЖКХ, Интернет');
-deposit = confirm('Есть ли у вас депозит в банке?');
-
-let expenses1 = prompt('Введите обязательную статью расходов', 'Еда'),
+    expenses1 = prompt('Введите обязательную статью расходов', 'Еда'),
     amount1 = +prompt('Во сколько это обойдется?', 15000),
     expenses2 = prompt('И ещё одна обязательная статью расходов', 'ЖКХ'),
     amount2 = +prompt('Во сколько это обойдется?', 12000);
@@ -25,28 +19,24 @@ console.log('income: ', showTypeOf(income));
 console.log('deposit: ', showTypeOf(deposit));
 
 // Функция расчета обязательных расходов на месяц
-let getExpensesMonth = function(amount1, amount2){
+let getExpensesMonth = function(){
     return amount1 + amount2;
 }
-let sumAmount = getExpensesMonth(amount1, amount2);
-console.log('Обязательные расходы за месяц: ', sumAmount);
+console.log('Обязательные расходы за месяц: ', getExpensesMonth());
 
 // Функция расчета накоплений за месяц
-let getAccumulatedMonth = function (money, sumAmount){
-    return money - sumAmount;
+let getAccumulatedMonth = function (){
+    return money - getExpensesMonth();
 }
-let accumulatedMonth = getAccumulatedMonth(money, sumAmount);
+let accumulatedMonth = getAccumulatedMonth();
 
+console.log('Возможные расходы: ', addExpenses.toLowerCase().split(', '));
 
-let lowerCase = (addExpenses.toLowerCase());
-let arr = lowerCase.split(', ');
-console.log('Возможные расходы: ', arr);
-
-// Функция расчета срока для длстижения цели
-let getTargetMonth = function (mission, accumulatedMonth){
-    return Math.ceil(mission / accumulatedMonth / 30);
+// Функция расчета срока для достижения цели
+let getTargetMonth = function (){
+    return Math.ceil(mission / accumulatedMonth);
 }
-console.log('Цель будет достигнута через: ', getTargetMonth(mission, accumulatedMonth), ' мес');
+console.log('Цель будет достигнута через: ', getTargetMonth(), ' мес');
 
 let budgetDay = Math.floor(accumulatedMonth / 30);
 console.log('Бюджет на день: ', budgetDay);
