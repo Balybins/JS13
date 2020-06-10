@@ -8,13 +8,11 @@ let someFunction = function (data){
     if (typeof data !== 'string'){
         return 'Это не строка! Введите корректные данные!';
     } else {
-        let changeData = data.trim();
-        if (changeData.length > 30){
-            let resultData = changeData.slice(0, 30) + '...';
-            return resultData;
-        } else {
-            return changeData;
-        }
+        data = data.trim();
+        if (data.length > 30){
+            return data.slice(0, 30) + '...';
+        } 
+        return data;
     }
 }
 console.log(someFunction(data));
