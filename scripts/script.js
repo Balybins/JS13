@@ -55,13 +55,11 @@ console.log('Возможные расходы: ', addExpenses.toLowerCase().spl
 
 // Функция расчета срока для достижения цели
 let getTargetMonth = function (){
-    if (Math.ceil(mission / accumulatedMonth) < 0) {
-        console.log('Цель не будет достигнута!');
-    } else {
-        console.log('Цель будет достигнута через: ', Math.ceil(mission / accumulatedMonth), ' мес');
-    } 
+    return Math.ceil(mission / accumulatedMonth);
 };
-getTargetMonth();
+let target = getTargetMonth() < 0 ? 'Цель не будет достигнута!' 
+                : 'Цель будет достигнута через: ' + getTargetMonth() + ' мес';
+console.log(target);
 
 let budgetDay = Math.floor(accumulatedMonth / 30);
 console.log('Бюджет на день: ', budgetDay);
