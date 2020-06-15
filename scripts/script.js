@@ -133,3 +133,11 @@ let allInfo = function() {
     }
 };
 allInfo();
+
+// let newArr = [];
+// for (let items of appData.addExpenses){
+//     // newArr.push(items);
+//     console.log(items);
+// }
+let newArr = appData.addExpenses.join(', ');
+console.log(newArr);
