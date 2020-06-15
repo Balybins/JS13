@@ -32,7 +32,7 @@ let appData = {
             let newExpenses = prompt('Введите обязательную статью расходов ' + (i + 1), 'Обязательная статья ' + (i + 1));
             let amount = +prompt('Во сколько это обойдется?');
             while (!isNumber(amount)) {
-                amount = prompt('Во сколько это обойдется?');
+                amount = +prompt('Во сколько это обойдется?');
             }
             appData.expenses[newExpenses] = amount;
         }
