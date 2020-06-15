@@ -30,11 +30,11 @@ let appData = {
 
         for (let i = 0; i < 2; i++) {
             let newExpenses = prompt('Введите обязательную статью расходов ' + (i + 1), 'Обязательная статья ' + (i + 1));
-            let amount = +prompt('Во сколько это обойдется?');
+            let amount = (prompt('Во сколько это обойдется?')).trim(); // Если приводить полученную строку к number здесь, то пробелы принимает как 0
             while (!isNumber(amount)) {
-                amount = +prompt('Во сколько это обойдется?');
+                amount = (prompt('Во сколько это обойдется?')).trim(); // Если приводить полученную строку к number здесь, то пробелы принимает как 0
             }
-            appData.expenses[newExpenses] = amount;
+            appData.expenses[newExpenses] = +amount; // Поэтому привожу строку к number, после всех проверок 
         }
     },
     budget: money,
