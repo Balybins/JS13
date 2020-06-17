@@ -5,8 +5,6 @@ const contBooks = document.querySelector('.books'),
     liBookSecond = books[0].querySelector('ul').querySelectorAll('li'),
     liBookFifth = books[5].querySelector('ul').querySelectorAll('li'),
     liBookSix = books[2].querySelector('ul').querySelectorAll('li');
-    
-    console.log('liBookFifth: ', liBookFifth);
 
 contBooks.prepend(books[1]);
 books[0].after(books[4]);
@@ -29,4 +27,3 @@ liBookSix[8].insertAdjacentHTML('beforeend', '<li>Глава 8: За преде�
 
 document.body.style.backgroundImage = 'url("./image/you-dont-know-js.jpg")';
 document.querySelector('.adv').remove();
-
