@@ -1,23 +1,27 @@
 'use strict';
 
 // Функция проверки данных, что это число
-let isNumber = function(n) {
+let isNumber = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-let isText = function(t) {
-    return t.match(/[^\d\sA-ZА-ЯЁ]/i) || t === "";
+let isText = function (t) {
+    return isNaN(parseFloat(t)) && t !== '' && t !== null;
 };
+
+// let isText = function(t) {
+//     return t.match(/[^\d\sA-ZА-ЯЁ]/i) || t === "";
+// };
 
 let money,
     // Функция получения данных о месячном доходе, с проверкой на то что введеные данные - число!
-    start = function() {
+    start = function () {
         do {
             money = prompt('Ваш месячный доход');
         }
         while (!isNumber(money));
     };
-    start();
+start();
 
 let appData = {
     income: {},
@@ -29,55 +33,58 @@ let appData = {
     moneyDeposit: 0,
     mission: 10000000,
     period: 6,
-    asking: function() {
+    asking: function () {
 
-        if (confirm('Есть ли у Вас дополнительный источник заработка?')){
+        if (confirm('Есть ли у Вас дополнительный источник заработка?')) {
             let itemIncome = (prompt('Ваш дополнительный заработок?', 'Вышивание')).trim();
-            while (isText(itemIncome)){
+            while (!isText(itemIncome)) {
                 itemIncome = (prompt('Ваш дополнительный заработок?', 'Вышивание')).trim();
             }
             let cashIncome = (prompt('Сколько в месяц Вы на этом зарабатываете?', 10000)).trim();
             while (!isNumber(cashIncome)) {
                 cashIncome = (prompt('Сколько в месяц Вы на этом зарабатываете?', 10000)).trim();
             }
-            appData.income[itemIncome] = +cashIncome; 
+            appData.income[itemIncome] = +cashIncome;
         }
 
-        let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-            appData.addExpenses = addExpenses.toLowerCase().split(', ');
-            appData.deposit = confirm('Есть ли у вас депозит в банке?');
+        let addExpenses = (prompt('Перечислите возможные расходы за рассчитываемый период через запятую')).trim();
+        while (!isText(addExpenses)) {
+            addExpenses = (prompt('Перечислите возможные расходы за рассчитываемый период через запятую')).trim();
+        }
+        appData.addExpenses = addExpenses.toLowerCase().split(', ');
+        appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
-            for (let i = 0; i < 2; i++) {
-                let newExpenses = (prompt('Введите обязательную статью расходов ' + (i+1), 'Обязательная статья ' + (i+1))).trim();
-                while (isText(newExpenses)){
-                    newExpenses = (prompt('Введите обязательную статью расходов ' + (i+1), 'Обязательная статья ' + (i+1))).trim();
-                }
-
-                let amount = (prompt('Во сколько это обойдется?')).trim(); // Если приводить полученную строку к number здесь, то пробелы принимает как 0
-                while (!isNumber(amount)) {
-                    amount = (prompt('Во сколько это обойдется?')).trim(); // Если приводить полученную строку к number здесь, то пробелы принимает как 0
-                }
-                appData.expenses[newExpenses] = +amount; // Поэтому привожу строку к number, после всех проверок 
+        for (let i = 0; i < 2; i++) {
+            let newExpenses = (prompt('Введите обязательную статью расходов ' + (i + 1), 'Обязательная статья ' + (i + 1))).trim();
+            while (!isText(newExpenses)) {
+                newExpenses = (prompt('Введите обязательную статью расходов ' + (i + 1), 'Обязательная статья ' + (i + 1))).trim();
             }
+
+            let amount = (prompt('Во сколько это обойдется?')).trim(); // Если приводить полученную строку к number здесь, то пробелы принимает как 0
+            while (!isNumber(amount)) {
+                amount = (prompt('Во сколько это обойдется?')).trim(); // Если приводить полученную строку к number здесь, то пробелы принимает как 0
+            }
+            appData.expenses[newExpenses] = +amount; // Поэтому привожу строку к number, после всех проверок 
+        }
     },
     budget: money,
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
-    getExpensesMonth: function() {
-        for (let key in appData.expenses){
+    getExpensesMonth: function () {
+        for (let key in appData.expenses) {
             appData.expensesMonth += +appData.expenses[key];
         }
         return appData.expensesMonth;
     },
-    getBudget: function (){
+    getBudget: function () {
         appData.budgetMonth = appData.budget - appData.expensesMonth;
         appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
-    getTargetMonth: function (){
+    getTargetMonth: function () {
         return Math.ceil(appData.mission / appData.budgetMonth);
     },
-    getStatusIncome: function(budgetDay){
+    getStatusIncome: function (budgetDay) {
         switch (true) {
             case budgetDay >= 1200:
                 return ('У вас высокий уровень дохода!');
@@ -89,8 +96,8 @@ let appData = {
                 return ('Что то пошло не так O_o');
         }
     },
-    getInfoDeposit: function (){
-        if (appData.deposit){
+    getInfoDeposit: function () {
+        if (appData.deposit) {
             let percentDeposit = (prompt('Какой годовой процент?', 10)).trim();
             while (!isNumber(percentDeposit)) {
                 percentDeposit = (prompt('Какой годовой процент?', 10)).trim();
@@ -104,7 +111,7 @@ let appData = {
             appData.moneyDeposit = +moneyDeposit;
         }
     },
-    calcSavedMoney: function (){
+    calcSavedMoney: function () {
         return appData.budgetMonth * appData.period;
     }
 };
@@ -119,23 +126,23 @@ appData.getBudget();
 appData.getInfoDeposit();
 
 // Вызов функции расчета срока для достижения цели
-let target = appData.getTargetMonth() < 0 ? 'Цель не будет достигнута!' 
-                : 'Цель будет достигнута через: ' + appData.getTargetMonth() + ' мес';
+let target = appData.getTargetMonth() < 0 ? 'Цель не будет достигнута!' :
+    'Цель будет достигнута через: ' + appData.getTargetMonth() + ' мес';
 console.log(target);
 
 // Вызов функции вывода уровня дохода
 console.log(appData.getStatusIncome(appData.budgetDay));
 
-let allInfo = function() {
+let allInfo = function () {
     console.log('Наша программа включает в себя данные: ');
-    for (let key in appData){
+    for (let key in appData) {
         console.log(key, ': ', appData[key]);
     }
 };
 allInfo();
 
 let newArr = [];
-for (let item of appData.addExpenses){
+for (let item of appData.addExpenses) {
     newArr.push(item[0].toUpperCase() + item.slice(1));
 }
 console.log(newArr.join(', '));
