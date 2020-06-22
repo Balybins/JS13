@@ -218,7 +218,7 @@ inputAmounts.forEach(function (item) {
 
 inputTitles.forEach(function (item) {
     item.addEventListener('input', function () {
-        let someWords = /[^\s\WА-ЯЁ]/i;
+        let someWords = /[^А-ЯЁ,.!? ]/i;
         item.value = item.value.replace(someWords, '');
     });
 });
