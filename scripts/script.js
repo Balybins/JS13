@@ -26,17 +26,16 @@ let start = document.getElementById('start'),
     salaryAmount = document.querySelector('.salary-amount'),
     incomeTitle = document.querySelectorAll('.income-title')[1],
     incomeItem = document.querySelectorAll('.income-items'),
-    // incomeAmount = document.querySelector('.income-amount'),
     expensesTitle = document.querySelectorAll('.expenses-title')[1],
-    // expensesAmount = document.querySelector('.expenses-amount'),
     incomeItems = document.querySelectorAll('.income-items'),
     expensesItems = document.querySelectorAll('.expenses-items'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select'),
-    periodAmount = document.querySelector('.period-amount');
-
-
+    periodAmount = document.querySelector('.period-amount'),
+    incomeAmount = document.querySelector('.income-amount'),
+    inputAmounts = document.querySelectorAll('input[placeholder="Сумма"]'),
+    inputTitles = document.querySelectorAll('input[placeholder="Наименование"]');
 
 let appData = {
     budget: 0,
@@ -209,3 +208,17 @@ start.disabled = true;
 start.style.cursor = 'default';
 salaryAmount.addEventListener('input', appData.checkSalaryAmount);
 periodSelect.addEventListener('input', appData.changePeriod);
+
+inputAmounts.forEach(function (item) {
+    item.addEventListener('input', function () {
+        let notNumbers = /\D/;
+        item.value = item.value.replace(notNumbers, '');
+    });
+});
+
+inputTitles.forEach(function (item) {
+    item.addEventListener('input', function () {
+        let someWords = /[^\s\WА-ЯЁ]/i;
+        item.value = item.value.replace(someWords, '');
+    });
+});
