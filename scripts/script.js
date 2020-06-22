@@ -55,8 +55,10 @@ let appData = {
     checkSalaryAmount: function () {
         if(isNumber(salaryAmount.value)){
             start.disabled = false;
+            start.style.cursor = '';
         } else {
             start.disabled = true;
+            start.style.cursor = 'default';
         }
     },
 
@@ -80,6 +82,9 @@ let appData = {
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
         incomePeriodValue.value = appData.calcPeriod();
+        periodSelect.addEventListener('input', function () {
+            incomePeriodValue.value = appData.calcPeriod();
+        });
     },
 
     addExpensesBlock: function () {
@@ -142,31 +147,6 @@ let appData = {
             }
         });
     },
-
-    // asking: function () {
-
-        
-
-        // let addExpenses = (prompt('Перечислите возможные расходы за рассчитываемый период через запятую')).trim();
-        // while (!isText(addExpenses)) {
-        //     addExpenses = (prompt('Перечислите возможные расходы за рассчитываемый период через запятую')).trim();
-        // }
-        // appData.addExpenses = addExpenses.toLowerCase().split(', ');
-        // appData.deposit = confirm('Есть ли у вас депозит в банке?');
-
-        // for (let i = 0; i < 2; i++) {
-        //     let newExpenses = (prompt('Введите обязательную статью расходов ' + (i + 1), 'Обязательная статья ' + (i + 1))).trim();
-        //     while (!isText(newExpenses)) {
-        //         newExpenses = (prompt('Введите обязательную статью расходов ' + (i + 1), 'Обязательная статья ' + (i + 1))).trim();
-        //     }
-
-        //     let amount = (prompt('Во сколько это обойдется?')).trim(); 
-        //     while (!isNumber(amount)) {
-        //         amount = (prompt('Во сколько это обойдется?')).trim(); 
-        //     }
-        //     appData.expenses[newExpenses] = +amount;
-        // }
-    // },
     
     getExpensesMonth: function () {
         for (let key in appData.expenses) {
@@ -215,14 +195,13 @@ let appData = {
 
     changePeriod: function () {
         periodAmount.textContent = periodSelect.value;
-        appData.start();
-        // incomePeriodValue.value = appData.calcPeriod();
     }
 };
 
 start.addEventListener('click', appData.start);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
-periodSelect.addEventListener('change', appData.changePeriod);
 start.disabled = true;
+start.style.cursor = 'default';
 salaryAmount.addEventListener('input', appData.checkSalaryAmount);
+periodSelect.addEventListener('input', appData.changePeriod);
