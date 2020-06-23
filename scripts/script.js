@@ -39,7 +39,7 @@ const render = function () {
         btnTodoComplete.addEventListener('click', function () {
             item.completed = !item.completed;
             render();
-        })
+        });
     });
 };
 
@@ -47,6 +47,9 @@ todoControl.addEventListener('submit', function (event) {
     event.preventDefault();
 
     if (headerInput.value !== '') {
+
+        localStorage.value = headerInput.value;
+
         const newTodo = {
             value: headerInput.value,
             completed: false
