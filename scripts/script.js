@@ -36,6 +36,13 @@ const render = function () {
             localStorage.data = JSON.stringify(todoData);
             render();
         });
+
+        const btnTodoRemove = li.querySelector('.todo-remove');
+        btnTodoRemove.addEventListener('click', function () {
+            todoData.splice(todoData.indexOf(item), 1);
+            localStorage.data = JSON.stringify(todoData);
+            render();
+        });
     });
 };
 
@@ -54,5 +61,4 @@ todoControl.addEventListener('submit', function (event) {
         render();
     }
 });
-
 render();
