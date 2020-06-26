@@ -65,7 +65,7 @@ let appData = {
     },
 
     start: function () {
-        console.log('start: ', this);
+        // console.log('start: ', this);
         start.style.display = 'none';
         cancel.style.display = 'block';
 
@@ -110,7 +110,7 @@ let appData = {
     },
 
     showResult: function () {
-        console.log('showResult: ', this);
+        // console.log('showResult: ', this);
 
         budgetMonthValue.value = this.budgetMonth;
         budgetDayValue.value = Math.floor(this.budgetDay);
@@ -141,10 +141,10 @@ let appData = {
     },
 
     getExpenses: function () {
-        console.log('getExpenses: ', this);
+        // console.log('getExpenses: ', this);
 
         expensesItems.forEach(function (item) {
-            console.log('IN getExpenses: ', this);
+            // console.log('IN getExpenses: ', this);
             let itemExpenses = item.querySelector('.expenses-title').value;
             let cashExpenses = item.querySelector('.expenses-amount').value;
             if (itemExpenses !== '' && cashExpenses !== '') {
@@ -165,10 +165,10 @@ let appData = {
     },
 
     getIncome: function () {
-        console.log('getIncome: ', this);
+        // console.log('getIncome: ', this);
 
         incomeItems.forEach(function (item) {
-            console.log('IN getIncome: ', this);
+            // console.log('IN getIncome: ', this);
             let itemIncome = item.querySelector('.income-title').value;
             let cashIncome = item.querySelector('.income-amount').value;
             if (itemIncome !== '' && cashIncome !== '') {
@@ -182,11 +182,11 @@ let appData = {
     },
 
     getAddExpenses: function () {
-        console.log('getAddExpenses: ', this);
+        // console.log('getAddExpenses: ', this);
 
         let addExpenses = additionalExpensesItem.value.split(',');
         addExpenses.forEach(function (item) {
-            console.log('IN getAddExpenses: ', this);
+            // console.log('IN getAddExpenses: ', this);
 
             item = item.trim();
             if (item !== '') {
@@ -196,10 +196,10 @@ let appData = {
     },
 
     getAddIncome: function () {
-        console.log('getAddIncome: ', this);
+        // console.log('getAddIncome: ', this);
 
         additionalIncomeItem.forEach(function (item) {
-            console.log('IN getAddIncome: ', this);
+            // console.log('IN getAddIncome: ', this);
 
             let itemValue = item.value.trim();
             if (itemValue !== '') {
@@ -209,7 +209,7 @@ let appData = {
     },
 
     getExpensesMonth: function () {
-        console.log('getExpensesMonth: ', this);
+        // console.log('getExpensesMonth: ', this);
 
         for (let key in this.expenses) {
             this.expensesMonth += +this.expenses[key];
@@ -218,14 +218,14 @@ let appData = {
     },
 
     getBudget: function () {
-        console.log('getBudget: ', this);
+        // console.log('getBudget: ', this);
 
         this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
         this.budgetDay = this.budgetMonth / 30;
     },
 
     getTargetMonth: function () {
-        console.log('getTargetMonth: ', this);
+        // console.log('getTargetMonth: ', this);
 
         return targetAmount.value / this.budgetMonth;
     },
@@ -260,13 +260,13 @@ let appData = {
     // },
 
     calcPeriod: function () {
-        console.log('calcPeriod: ', this);
+        // console.log('calcPeriod: ', this);
 
         return this.budgetMonth * periodSelect.value;
     },
 
     changePeriod: function () {
-        console.log('changePeriod: ', this);
+        // console.log('changePeriod: ', this);
 
         periodAmount.textContent = periodSelect.value;
     },
