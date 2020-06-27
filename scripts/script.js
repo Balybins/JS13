@@ -257,21 +257,21 @@ AppData.prototype.eventListeners = function () {
     periodSelect.addEventListener('input', this.changePeriod.bind(this));  
     start.disabled = true;
     start.style.cursor = 'default';
+
+    inputAmounts.forEach(function (item) {
+        item.addEventListener('input', function () {
+            let notNumbers = /\D/;
+            item.value = item.value.replace(notNumbers, '');
+        });
+    });
+    
+    inputTitles.forEach(function (item) {
+        item.addEventListener('input', function () {
+            let someWords = /[^А-ЯЁ,.!? ]/i;
+            item.value = item.value.replace(someWords, '');
+        });
+    });
 };
 
 const appData = new AppData();
 appData.eventListeners();
-
-inputAmounts.forEach(function (item) {
-    item.addEventListener('input', function () {
-        let notNumbers = /\D/;
-        item.value = item.value.replace(notNumbers, '');
-    });
-});
-
-inputTitles.forEach(function (item) {
-    item.addEventListener('input', function () {
-        let someWords = /[^А-ЯЁ,.!? ]/i;
-        item.value = item.value.replace(someWords, '');
-    });
-});
