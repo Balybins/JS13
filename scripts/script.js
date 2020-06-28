@@ -310,6 +310,7 @@ class AppData {
             if (depositPercent.value < 0 || depositPercent.value > 100){
                 depositPercent.value = '';
                 depositPercent.placeholder='Введите корректное число от 0 до 100';
+                alert('Введите корректное число от 0 до 100');
                 start.disabled = true;
                 start.style.cursor = 'default';
             } else if (salaryAmount.value !== '') {
