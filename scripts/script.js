@@ -30,7 +30,10 @@ const start = document.getElementById('start'),
     inputAmounts = document.querySelectorAll('input[placeholder="Сумма"]'),
     inputTitles = document.querySelectorAll('input[placeholder="Наименование"]'),
     leftSideInputs = document.querySelector('.data'),
-    rightSideInputs = document.querySelector('.result');
+    rightSideInputs = document.querySelector('.result'),
+    depositBank = document.querySelector('.deposit-bank'),
+    depositAmount = document.querySelector('.deposit-amount'),
+    depositPercent = document.querySelector('.deposit-percent');
 
 let incomeItems = document.querySelectorAll('.income-items'),
     expensesItems = document.querySelectorAll('.expenses-items');
@@ -72,6 +75,7 @@ class AppData {
         this.getExpensesMonth();
         this.getAddExpenses();
         this.getAddIncome();
+        this.getInfoDeposit();
         this.getBudget();
         this.blockedInputs();
         this.showResult();
@@ -97,12 +101,19 @@ class AppData {
         }
         periodSelect.value = periodAmount.textContent = 1;
         depositCheck.checked = false;
+        depositCheck.disabled = false;
         start.disabled = true;
+        depositBank.disabled = false;
         start.style.cursor = 'default';
         this.budget = this.budgetDay = this.budgetMonth = this.expensesMonth = this.incomeMonth = this.percentDeposit = this.moneyDeposit = 0;
         this.income = this.expenses = {};
         this.addIncome = this.addExpenses = [];
+        depositBank.style.display = 'none';
+        depositAmount.style.display = 'none';
+        depositPercent.style.display = 'none';
+        depositBank.value = depositAmount.value = depositPercent.value = '';
         this.deposit = false;
+        depositPercent.placeholder='Процент';
     }
     
     showResult() {
@@ -191,7 +202,9 @@ class AppData {
     }
     
     getBudget() {
-        this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
+        const monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
+
+        this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth  + monthDeposit;
         this.budgetDay = this.budgetMonth / 30;
     }
     
@@ -199,34 +212,18 @@ class AppData {
         return targetAmount.value / this.budgetMonth;
     }
     
-    getStatusIncome(budgetDay) {
-        switch (true) {
-            case budgetDay >= 1200:
-                return ('У вас высокий уровень дохода!');
-            case budgetDay < 1200 && budgetDay >= 600:
-                return ('У вас средний уровень дохода.');
-            case budgetDay < 600 && budgetDay >= 0:
-                return ('К сожалению у вас уровень дохода ниже среднего :(');
-            case budgetDay < 0:
-                return ('Что то пошло не так O_o');
-        }
-    }
-    
-    getInfoDeposit() {
-        if (this.deposit) {
-            let percentDeposit = (prompt('Какой годовой процент?', 10)).trim();
-            while (!isNumber(percentDeposit)) {
-                percentDeposit = (prompt('Какой годовой процент?', 10)).trim();
-            }
-            this.percentDeposit = +percentDeposit;
-    
-            let moneyDeposit = (prompt('Какая сумма заложена?', 10000)).trim();
-            while (!isNumber(moneyDeposit)) {
-                moneyDeposit = (prompt('Какая сумма заложена?', 10000)).trim();
-            }
-            this.moneyDeposit = +moneyDeposit;
-        }
-    }
+    // getStatusIncome(budgetDay) {
+    //     switch (true) {
+    //         case budgetDay >= 1200:
+    //             return ('У вас высокий уровень дохода!');
+    //         case budgetDay < 1200 && budgetDay >= 600:
+    //             return ('У вас средний уровень дохода.');
+    //         case budgetDay < 600 && budgetDay >= 0:
+    //             return ('К сожалению у вас уровень дохода ниже среднего :(');
+    //         case budgetDay < 0:
+    //             return ('Что то пошло не так O_o');
+    //     }
+    // }
     
     calcPeriod() {
         return this.budgetMonth * periodSelect.value;
@@ -240,11 +237,52 @@ class AppData {
         leftSideInputs.querySelectorAll('input[type="text"]').forEach((item) => {
             item.disabled = true;
         });
+        depositBank.disabled = true;
+        depositCheck.disabled = true;
+    }
+
+    getInfoDeposit() {
+        if (this.deposit) {
+            this.percentDeposit = depositPercent.value;
+            this.moneyDeposit = depositAmount.value;
+        }
+    }
+
+    changePercent() {
+        const valueSelect = this.value;
+        if (valueSelect === 'other'){
+            depositPercent.style.display = 'inline-block';
+            depositPercent.value = '';
+        } else {
+            depositPercent.value = valueSelect;
+            depositPercent.style.display = 'none';
+            if (salaryAmount.value !== ''){
+                start.disabled = false;
+                start.style.cursor = '';
+            }
+        }
+    }
+
+    depositHandler() {
+        if (depositCheck.checked){
+            depositBank.style.display = 'inline-block';
+            depositAmount.style.display = 'inline-block';
+            this.deposit = true;
+            depositBank.addEventListener('change', this.changePercent);
+        } else {
+            depositBank.style.display = 'none';
+            depositAmount.style.display = 'none';
+            depositPercent.style.display = 'none';
+            depositBank.value = depositAmount.value = depositPercent.value = '';
+            this.deposit = false;
+            depositBank.removeEventListener('change', this.changePercent);
+        }
     }
     
     eventListeners() {
         start.addEventListener('click', this.start.bind(this));
         cancel.addEventListener('click', this.reset.bind(this));
+        depositCheck.addEventListener('change', this.depositHandler.bind(this));
         expensesPlus.addEventListener('click', this.addExpensesBlock);
         incomePlus.addEventListener('click', this.addIncomeBlock);
         salaryAmount.addEventListener('input', this.checkSalaryAmount);
@@ -264,6 +302,20 @@ class AppData {
                 const someWords = /[^А-ЯЁ,.!? ]/i;
                 item.value = item.value.replace(someWords, '');
             });
+        });
+
+        depositPercent.addEventListener('input', () => {
+            const notNumbers = /\D/;
+            depositPercent.value = depositPercent.value.replace(notNumbers, '');
+            if (depositPercent.value < 0 || depositPercent.value > 100){
+                depositPercent.value = '';
+                depositPercent.placeholder='Введите корректное число от 0 до 100';
+                start.disabled = true;
+                start.style.cursor = 'default';
+            } else if (salaryAmount.value !== '') {
+                start.disabled = false;
+                start.style.cursor = '';
+            }
         });
     }
 }
