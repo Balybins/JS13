@@ -67,8 +67,7 @@ class AppData {
     
         this.budget = +salaryAmount.value;
     
-        this.getExpenses();
-        this.getIncome();
+        this.getExpInc();
         this.getExpensesMonth();
         this.getAddExpenses();
         this.getAddIncome();
@@ -129,16 +128,6 @@ class AppData {
         }
     }
     
-    getExpenses() {
-        expensesItems.forEach((item) => {
-            const itemExpenses = item.querySelector('.expenses-title').value;
-            const cashExpenses = item.querySelector('.expenses-amount').value;
-            if (itemExpenses !== '' && cashExpenses !== '') {
-                this.expenses[itemExpenses] = cashExpenses;
-            }
-        });
-    }
-    
     addIncomeBlock() {
         const cloneIncomeItem = incomeItems[0].cloneNode(true);
         cloneIncomeItem.querySelector('.income-title').value = '';
@@ -149,16 +138,29 @@ class AppData {
             incomePlus.style.display = 'none';
         }
     }
-    
-    getIncome() {
-        incomeItems.forEach((item) => {
-            const itemIncome = item.querySelector('.income-title').value;
-            const cashIncome = item.querySelector('.income-amount').value;
-            if (itemIncome !== '' && cashIncome !== '') {
-                this.income[itemIncome] = cashIncome;
+
+    addExpIncBlock() {
+        const add = (item) => {
+
+        };
+
+        incomeItems.forEach(add);
+        expensesItems.forEach(add);
+    }
+
+    getExpInc() {
+        const count = (item) => {
+            const startStr = item.className.split('-')[0];
+            const itemTitle = item.querySelector(`.${startStr}-title`).value;         
+            const itemAmount = item.querySelector(`.${startStr}-amount`).value;
+            if (itemTitle !== '' && itemAmount !== '') {
+                this[startStr][itemTitle] = itemAmount;
             }
-        });
-    
+        };
+
+        incomeItems.forEach(count);
+        expensesItems.forEach(count);
+
         for (const key in this.income) {
             this.incomeMonth += +this.income[key];
         }
