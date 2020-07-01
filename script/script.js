@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
+    console.dir(screen);
     // Таймер
     function countTimer(deadline) {
         let timerHours = document.getElementById('timer-hours'),
@@ -90,16 +91,36 @@ window.addEventListener('DOMContentLoaded', () => {
     const togglePopUp = () => {
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
-            popupClose = document.querySelector('.popup-close');
+            popupClose = document.querySelector('.popup-close'),
+            popupContent = document.querySelector('.popup-content'),
+            screenWidth = screen.width;
+        let count = 0,
+            animate;
+
+        let popupAnimate = () => {
+            animate = requestAnimationFrame(popupAnimate);
+            count++;
+            if (count < 40) {
+                popupContent.style.top = count * 5 + 'px';
+            } else {
+                count = 0;
+                cancelAnimationFrame(animate);
+            }
+        };
 
         popupBtn.forEach((items) => {
             items.addEventListener('click', () => {
                 popup.style.display = 'block';
+                if (screenWidth >= 768) {
+                    animate = requestAnimationFrame(popupAnimate);
+                }
             });
         });
 
         popupClose.addEventListener('click', () => {
             popup.style.display = 'none';
+            count = 0;
+            cancelAnimationFrame(animate);
         });
     };
     togglePopUp();
