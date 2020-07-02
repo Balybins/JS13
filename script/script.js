@@ -69,12 +69,9 @@ window.addEventListener("DOMContentLoaded", () => {
   // Меню
   const toggleMenu = () => {
     const menu = document.querySelector("menu"),
-      closeBtn = document.querySelector(".close-btn"),
       menuItems = menu.querySelectorAll("ul>li"),
       btn = document.querySelector("main>a"),
       body = document.querySelector('body');
-
-
 
     const handlerMenu = () => {
       if (
@@ -89,7 +86,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     body.addEventListener('click', (event) => {
       let target = event.target;
-      if (target.classList.contains('menu') || target.classList.contains('close-btn') || target.offsetParent.nodeName === 'MENU') {
+      if (target.classList.contains('menu') || target.classList.contains('close-btn') || target.offsetParent.tagName === 'MENU') {
         handlerMenu();
       } else {
         target = target.closest('.menu');
@@ -99,10 +96,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // btnMenu.addEventListener("click", handlerMenu);
-    // closeBtn.addEventListener("click", handlerMenu);
-
-
+    // Для усложненного задания, нужно ли вот эти блоки переносить в 1 обработчик?
     const scrollTo = (id) => {
       window.scroll({
         left: 0,
@@ -110,11 +104,10 @@ window.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth",
       });
     };
-
+    
     menuItems.forEach((items) =>
       items.addEventListener("click", (e) => {
         e.preventDefault();
-        // handlerMenu();
         let id = items.querySelector("a").attributes.href.value;
 
         scrollTo(document.querySelector(id));
@@ -127,6 +120,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       scrollTo(document.querySelector(id));
     });
+    // ....
   };
   toggleMenu();
 
