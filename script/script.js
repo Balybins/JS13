@@ -64,15 +64,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
     updateClock();
   }
-  countTimer("01 july 2020");
+  countTimer("01 aug 2020");
 
   // Меню
   const toggleMenu = () => {
-    const btnMenu = document.querySelector(".menu"),
-      menu = document.querySelector("menu"),
+    const menu = document.querySelector("menu"),
       closeBtn = document.querySelector(".close-btn"),
       menuItems = menu.querySelectorAll("ul>li"),
-      btn = document.querySelector("main>a");
+      btn = document.querySelector("main>a"),
+      body = document.querySelector('body');
+
+
 
     const handlerMenu = () => {
       if (
@@ -85,6 +87,22 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    body.addEventListener('click', (event) => {
+      let target = event.target;
+      if (target.classList.contains('menu') || target.classList.contains('close-btn') || target.offsetParent.nodeName === 'MENU') {
+        handlerMenu();
+      } else {
+        target = target.closest('.menu');
+        if (target) {
+          handlerMenu();
+        }
+      }
+    });
+
+    // btnMenu.addEventListener("click", handlerMenu);
+    // closeBtn.addEventListener("click", handlerMenu);
+
+
     const scrollTo = (id) => {
       window.scroll({
         left: 0,
@@ -93,12 +111,10 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     };
 
-    btnMenu.addEventListener("click", handlerMenu);
-    closeBtn.addEventListener("click", handlerMenu);
     menuItems.forEach((items) =>
       items.addEventListener("click", (e) => {
         e.preventDefault();
-        handlerMenu();
+        // handlerMenu();
         let id = items.querySelector("a").attributes.href.value;
 
         scrollTo(document.querySelector(id));
