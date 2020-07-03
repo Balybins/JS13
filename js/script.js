@@ -27,6 +27,7 @@ class Todo {
         li.insertAdjacentHTML('beforeend', `
             <span class="text-todo">${todo.value}</span>
             <div class="todo-buttons">
+                <button class="todo-edit"></button>
                 <button class="todo-remove"></button>
                 <button class="todo-complete"></button>
             </div>
@@ -80,6 +81,28 @@ class Todo {
         this.render();
     }
 
+    editItem(target, key) {
+        let text = target.offsetParent.offsetParent.firstElementChild;
+        text.contentEditable = true;
+        text.focus();
+
+        const editText = () => {
+            if (text.textContent.trim()) {
+                this.todoData.forEach((elem) => {
+                    if (elem.key === key) {
+                        elem.value = text.textContent.trim();
+                    }
+                })
+            } else {
+                alert('Поле с планами должно быть заполненно!!!');
+            }
+            this.addToStorage();
+            this.render();
+            text.removeEventListener('blur', editText);
+        }
+        text.addEventListener('blur', editText);
+    }
+
     handler() {
         const todoContainer = document.querySelector('.todo-container');
 
@@ -89,6 +112,8 @@ class Todo {
                 this.deleteItem(event.target.offsetParent.offsetParent.key);
             } else if (target.classList.contains('todo-complete')) {
                 this.completedItem(event.target.offsetParent.offsetParent.key);
+            } else if (target.classList.contains('todo-edit')) {
+                this.editItem(event.target, event.target.offsetParent.offsetParent.key);
             }
         })
         
