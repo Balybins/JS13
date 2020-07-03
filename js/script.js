@@ -41,7 +41,6 @@ class Todo {
 
     addTodo(e) {
         e.preventDefault();
-
         if (this.input.value.trim()) {
             const newTodo = {
                 value: this.input.value,
@@ -49,7 +48,11 @@ class Todo {
                 key: this.generateKey(),
             }
             this.todoData.set(newTodo.key, newTodo);
+            this.input.value = '';
             this.render();
+        } else {
+            alert('Поле с планами должно быть заполненно!!!');
+            this.input.value = '';
         }
     }
 
@@ -57,21 +60,44 @@ class Todo {
         return Math.random().toString(32).substring(2, 15) + Math.random().toString(32).substring(2, 15);
     }
 
-    completedItem() {
-
+    completedItem(key) {
+        this.todoData.forEach((elem) => {
+            if (elem.key === key) {
+                if (elem.completed){
+                    elem.completed = false;
+                } else {
+                    elem.completed = true;
+                }
+                this.addToStorage();
+                this.render();
+            }
+        })
     }
 
-    deleteItem() {
-
+    deleteItem(key) {
+        this.todoData.delete(key);
+        this.addToStorage();
+        this.render();
     }
 
     handler() {
+        const todoContainer = document.querySelector('.todo-container');
 
+        todoContainer.addEventListener('click', (event) => {
+            let target = event.target;
+            if (target.classList.contains('todo-remove')){
+                this.deleteItem(event.target.offsetParent.offsetParent.key);
+            } else if (target.classList.contains('todo-complete')) {
+                this.completedItem(event.target.offsetParent.offsetParent.key);
+            }
+        })
+        
     }
 
     init() {
         this.form.addEventListener('submit', this.addTodo.bind(this));
         this.render();
+        this.handler();
     }
 }
 
