@@ -316,30 +316,37 @@ window.addEventListener("DOMContentLoaded", () => {
   addDots();
 
   // Change img
-  const command = document.getElementById('command'),
-    commandPhoto = document.querySelectorAll('.command__photo');
-    console.log('commandPhoto: ', commandPhoto);
-
-    // commandPhoto.forEach((items) => {
-    //   console.log('commandPhoto: ', items);   
-    // });
-    
+  const command = document.getElementById('command');
 
     command.addEventListener('mouseover', (event) => {
       if (event.target.matches('.command__photo')){
-          event.target.src = event.target.dataset.img;
+        let origImg = event.target.src,
+          newImg = event.target.dataset.img;
+      
+      const newImage = () => {
+        event.target.src = newImg;
+        console.log(1);
+        event.target.removeEventListener('mouseenter', newImage);
+      };
+      event.target.addEventListener('mouseenter', newImage);
+
+      const origImage = () => {
+        event.target.src = origImg;
+        console.log(2);
+        event.target.removeEventListener('mouseleave', origImage);
+      };
+      event.target.addEventListener('mouseleave', origImage);
+      
+      // event.target.addEventListener('mouseenter', () => {
+      //     event.target.src = newImg;
+      //     console.log(1);
+      // });
+      // event.target.addEventListener('mouseleave', () => {
+      //     event.target.src = origImg;
+      //     console.log(2);
+      // });
       }
+      
     });
-    command.addEventListener('mouseout', (event) => {
-      if (event.target.matches('.command__photo')){
-          commandPhoto.forEach((items) => {
-              // console.log(items.dataset);
-              // console.log(event.target.src);
-              if (items.dataset === event.target.src){
-                console.log('123: ', 123);
-              }
-          });
-          // event.target.src = '';
-      }
-    });
+    
 });
