@@ -314,4 +314,32 @@ window.addEventListener("DOMContentLoaded", () => {
     slider();
   };
   addDots();
+
+  // Change img
+  const command = document.getElementById('command'),
+    commandPhoto = document.querySelectorAll('.command__photo');
+    console.log('commandPhoto: ', commandPhoto);
+
+    // commandPhoto.forEach((items) => {
+    //   console.log('commandPhoto: ', items);   
+    // });
+    
+
+    command.addEventListener('mouseover', (event) => {
+      if (event.target.matches('.command__photo')){
+          event.target.src = event.target.dataset.img;
+      }
+    });
+    command.addEventListener('mouseout', (event) => {
+      if (event.target.matches('.command__photo')){
+          commandPhoto.forEach((items) => {
+              // console.log(items.dataset);
+              // console.log(event.target.src);
+              if (items.dataset === event.target.src){
+                console.log('123: ', 123);
+              }
+          });
+          // event.target.src = '';
+      }
+    });
 });
