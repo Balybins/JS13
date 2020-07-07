@@ -318,11 +318,11 @@ window.addEventListener("DOMContentLoaded", () => {
   // Change img
   const command = document.getElementById('command');
 
-    command.addEventListener('mouseover', (event) => {
-      if (event.target.matches('.command__photo')){
-        let origImg = event.target.src,
-          newImg = event.target.dataset.img;
-      
+  command.addEventListener('mouseover', (event) => {
+    if (event.target.matches('.command__photo')) {
+      let origImg = event.target.src,
+        newImg = event.target.dataset.img;
+
       const newImage = () => {
         event.target.src = newImg;
         console.log(1);
@@ -336,7 +336,7 @@ window.addEventListener("DOMContentLoaded", () => {
         event.target.removeEventListener('mouseleave', origImage);
       };
       event.target.addEventListener('mouseleave', origImage);
-      
+
       // event.target.addEventListener('mouseenter', () => {
       //     event.target.src = newImg;
       //     console.log(1);
@@ -345,8 +345,19 @@ window.addEventListener("DOMContentLoaded", () => {
       //     event.target.src = origImg;
       //     console.log(2);
       // });
-      }
-      
-    });
-    
+    }
+
+  });
+
+  // Only numbers
+  const calc = document.getElementById('calc');
+
+  calc.addEventListener('click', (event) => {
+    if (event.target.tagName === 'INPUT') {
+      event.target.addEventListener('input', () => {
+        const notNumbers = /\D/;
+        event.target.value = event.target.value.replace(notNumbers, '');
+      });
+    }
+  });
 });
