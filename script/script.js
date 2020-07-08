@@ -373,9 +373,16 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 
 			if (typeValue && squareValue) {
-				total = price * typeValue * squareValue * countValue * dayValue;
+				const random = setInterval(() => {
+					totalValue.textContent = Math.floor(Math.random() * 1000);
+				}, 10);
+				setTimeout(() => {
+					clearInterval(random);
+					total = price * typeValue * squareValue * countValue * dayValue;
+					totalValue.textContent = Math.floor(total);
+				}, 300);
 			}
-			totalValue.textContent = total;
+			totalValue.textContent = Math.floor(total);
 		};
 
 		calcBlock.addEventListener('change', (event) => {
