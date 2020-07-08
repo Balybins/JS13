@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				seconds = Math.floor(timeRemaining % 60),
 				minutes = Math.floor((timeRemaining / 60) % 60),
 				hours = Math.floor(timeRemaining / 60 / 60);
-			// На будущее, рассчет дней
+			// На будущее - рассчет дней
 			// hours = Math.floor((timeRemaining / 60 / 60)) % 24;
 			// days = Math.floor(timeRemaining / 60 / 60 / 24);
 
@@ -330,15 +330,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				event.target.removeEventListener('mouseleave', origImage);
 			};
 			event.target.addEventListener('mouseleave', origImage);
-
-			// event.target.addEventListener('mouseenter', () => {
-			// event.target.src = newImg;
-			// console.log(1);
-			// });
-			// event.target.addEventListener('mouseleave', () => {
-			// event.target.src = origImg;
-			// console.log(2);
-			// });
 		}
 
 	});
