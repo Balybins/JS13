@@ -10,15 +10,14 @@
     "sourceType": "module"
   },
   "rules": {
-    "quotes": 
-      [
-        "error", 
-        "single"
-      ],
-    "indent": [
+    "quotes": [
       "error",
-      4
+      "single"
     ],
+    // "indent": [
+    //   "error",
+    //   4
+    // ],
     "linebreak-style": [
       "error",
       "windows"
