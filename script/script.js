@@ -325,14 +325,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const newImage = () => {
         event.target.src = newImg;
-        console.log(1);
         event.target.removeEventListener('mouseenter', newImage);
       };
       event.target.addEventListener('mouseenter', newImage);
 
       const origImage = () => {
         event.target.src = origImg;
-        console.log(2);
         event.target.removeEventListener('mouseleave', origImage);
       };
       event.target.addEventListener('mouseleave', origImage);
