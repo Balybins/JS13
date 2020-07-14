@@ -3,8 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const select = document.getElementById('cars'),
         output = document.getElementById('output');
 
-    const chooseCar = () => {
-        return new Promise((resolve, reject) => {
+    const showCar = data => {
+        data.cars.forEach(item => {
+            if (item.brand === select.value) {
+                const { brand, model, price } = item;
+                output.innerHTML = `Тачка ${brand} ${model} <br>
+                        Цена: ${price}$`;
+            }
+        });
+    };
+
+    const error = error => output.innerHTML = error;
+
+    select.addEventListener('change', () => {
+        new Promise((resolve, reject) => {
             if (select.value !== 'no') {
                 const request = new XMLHttpRequest();
                 request.open('GET', './cars.json');
@@ -26,24 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const error = 'Выберите авто!';
                 reject(error);
             }
-        });
-    };
-
-    const showCar = data => {
-        data.cars.forEach(item => {
-            if (item.brand === select.value) {
-                const { brand, model, price } = item;
-                output.innerHTML = `Тачка ${brand} ${model} <br>
-                        Цена: ${price}$`;
-            }
-        });
-    };
-
-    const error = error => output.innerHTML = error;
-
-    select.addEventListener('change', () => {
-        chooseCar()
-            .then(showCar)
-            .catch(error);
+        }).then(showCar).catch(error);
     });
 });
