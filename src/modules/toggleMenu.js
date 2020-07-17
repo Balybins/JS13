@@ -20,18 +20,17 @@ const toggleMenu = () => {
     };
 
     body.addEventListener('click', event => {
-        let target = event.target;
+        const target = event.target;
         if (
             target.classList.contains('menu') ||
             target.classList.contains('close-btn') ||
-            target.classList.contains('menu')
+            target.closest('.menu')
         ) {
             handlerMenu();
-        } else {
-            target = target.closest('.menu');
-            if (target) {
-                handlerMenu();
-            }
+        } else if (target.nodeName !== 'MENU' && target.offsetParent.nodeName === 'MENU') {
+            handlerMenu();
+        } else if (menu.style.transform && target.nodeName !== 'MENU' && menu.style.transform !== 'translate(-100%)') {
+            handlerMenu();
         }
     });
 
