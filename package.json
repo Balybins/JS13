@@ -1,0 +1,27 @@
+{
+  "name": "Diploma_JS13.0",
+  "version": "1.0.0",
+  "description": "Diploma project at JS13.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Balybins/tree/diploma"
+  },
+  "keywords": [],
+  "author": "Balybin Stanislav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Balybins/JS13/issues"
+  },
+  "homepage": "https://github.com/Balybins/JS13/tree/diploma",
+  "devDependencies": {
+    "path": "^0.12.7",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
