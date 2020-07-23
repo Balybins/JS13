@@ -1,7 +1,7 @@
 // eslint-disable-next-line strict
 'use strict';
 
-import start from './modules/start';
+import popUp from './modules/popup';
 
 //Начало выполнения
-start();
+popUp();
