@@ -1402,6 +1402,21 @@ nav.popup-menu .close-menu-btn img {
     margin-right: 5px
 }
 
+.slider-dots-slick {
+    width: 22px;
+    height: 4px;
+    background-color: #fff;
+    border: none;
+    border-radius: 2px;
+    color: transparent;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.slick-active {
+    background-color: #ffd11a
+}
+
 .slider-dots li.slick-active button {
     background-color: #ffd11a
 }
@@ -1615,7 +1630,12 @@ nav.popup-menu .close-menu-btn img {
 
 #gallery .gallery-slider .slide {
     margin: 0 auto !important;
-    width: 100%
+    width: 100%;
+    display: none;
+}
+
+#gallery .gallery-slider .gallery-slider-active {
+    display: block;
 }
 
 #gallery .gallery-slider .slider-arrow {

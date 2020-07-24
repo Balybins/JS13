@@ -6,6 +6,7 @@ import scroll from './modules/scroll';
 import burgerMenu from './modules/burgerMenu';
 import mainSlider from './modules/mainSlider';
 import SliderCarousel from './modules/carousel';
+import gallery from './modules/gallery';
 
 //Модальные окна
 popUp();
@@ -15,8 +16,9 @@ scroll();
 burgerMenu();
 // Слайдер на главной странице
 mainSlider();
+// Фотогаллерея
+gallery();
 // Карусель
-
 const carousel = new SliderCarousel({
     main: '#services>div',
     wrap: '.services-slider',
