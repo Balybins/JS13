@@ -28,6 +28,7 @@ const popup = () => {
             gift.style.display = 'block';
             fixedGift.style.display = 'none';
         });
+        // eslint-disable-next-line no-empty
     } catch {}
 
     // Отобразить модальное окно popup-menu
@@ -55,6 +56,7 @@ const popup = () => {
                 if (event.target.parentNode.parentNode.parentNode.id === 'gift') {
                     gift.style.display = 'none';
                 }
+                // eslint-disable-next-line no-empty
             } catch {}
         });
     });
@@ -74,6 +76,7 @@ const popup = () => {
                 gift.style.display = 'none';
             }
         });
+        // eslint-disable-next-line no-empty
     } catch {}
 
     //Закрыть меню при клике на крестик, либо пункт меню
