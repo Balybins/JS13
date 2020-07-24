@@ -2,6 +2,12 @@
 'use strict';
 
 import popUp from './modules/popup';
+import scroll from './modules/scroll';
+import burgerMenu from './modules/burgerMenu';
 
-//Начало выполнения
+//Модальные окна
 popUp();
+// Прокрутка страницы
+scroll();
+// "Липкий" бургер-меню
+burgerMenu();
