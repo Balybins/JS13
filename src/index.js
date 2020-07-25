@@ -7,6 +7,7 @@ import burgerMenu from './modules/burgerMenu';
 import mainSlider from './modules/mainSlider';
 import SliderCarousel from './modules/carousel';
 import gallery from './modules/gallery';
+import calc from './modules/calc';
 
 //Модальные окна
 popUp();
@@ -41,3 +42,5 @@ const carousel = new SliderCarousel({
     ]
 });
 carousel.init();
+// Калькулятор
+calc();
