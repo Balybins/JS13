@@ -57,6 +57,6 @@ const calc = () => {
             checkPromo();
         });
         // eslint-disable-next-line no-empty
-    } catch {}
+    } catch { }
 };
 export default calc;

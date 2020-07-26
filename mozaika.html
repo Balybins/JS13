@@ -308,11 +308,11 @@
                     <div class="right">
                         <input type="hidden" name="form_name" value="Заказать карту">
                         <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
-                        <p class="input-text"><input type="tel" name="phone" id="callback_form-phone" required
-                                placeholder="Ваш номер телефона..."></p>
+                        <p class="input-text"><input type="tel" class="form-phone" name="phone" id="callback_form-phone"
+                                required placeholder="Ваш номер телефона..."></p>
                         <div class="form-bottom">
                             <p class="personal-data">
-                                <input type="checkbox" required id="card_check"><label for="card_check">Я согласен на
+                                <input type="checkbox" id="card_check"><label for="card_check">Я согласен на
                                     обработку персональных данных</label>
                             </p>
                             <p class="submit">
@@ -412,10 +412,11 @@
                 <form name="banner-form" id="banner-form" action="#" method="post">
                     <input type="hidden" name="form_name" value=" Записаться на визит">
                     <input name="name" type="text" required placeholder="Ваше имя...">
-                    <input type="tel" name="phone" id="phone" required placeholder="Ваш номер телефона...">
+                    <input type="tel" class="form-phone" name="phone" id="phone" required
+                        placeholder="Ваш номер телефона...">
                     <button name="send" class="btn" type="submit">Записаться</button>
                     <p class="personal-data">
-                        <input type="checkbox" required id="check1"><label for="check1">Я согласен на обработку
+                        <input type="checkbox" id="check1"><label for="check1">Я согласен на обработку
                             персональных
                             данных</label>
                     </p>
@@ -427,7 +428,7 @@
     <section id="map">
         <script type="text/javascript" charset="utf-8" async
             src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6f8a0936ac643a17a18a807cb2df7581cdaeec98a82d6c322badda5427067a3b&amp;width=100%25&amp;height=500&amp;lang=ru_RU&amp;scroll=false">
-        </script>
+            </script>
     </section>
     <footer id="footer">
         <div class="wrapper">
@@ -458,9 +459,10 @@
                         <div class="content">
                             <div class="choose-club">
                                 <h5>Выбрать клуб</h5>
+                                <input type="hidden" name="form_name" value="Выбрать клуб">
                                 <div class="club">
-                                    <input type="radio" id="footer_leto_mozaika" name="club-name" value="mozaika"><label
-                                        for="footer_leto_mozaika">
+                                    <input type="radio" id="footer_leto_mozaika" name="club-name" value="mozaika"
+                                        checked><label for="footer_leto_mozaika">
                                         <h6>Тело «Мозаика»</h6>
                                         <p>Россия, Москва, 7-я Кожуховская ул.,&nbsp;9</p>
                                     </label>
@@ -476,8 +478,9 @@
                             <div class="call">
                                 <p>Единый телефон</p>
                                 <p class="tel">+7 (800) 555-64-47</p>
-                                <p class="input-text"><input type="tel" name="phone" id="callback_footer_form-phone"
-                                        required="" placeholder="Ваш номер телефона..."></p>
+                                <p class="input-text"><input type="tel" class="form-phone" name="phone"
+                                        id="callback_footer_form-phone" required="" placeholder="Ваш номер телефона...">
+                                </p>
                                 <button class="btn callback-btn" type="submit" data-popup="#callback_form">Перезвоните
                                     мне
                                 </button>
@@ -528,10 +531,10 @@
                     <input type="hidden" name="form_name" value=" Обратный звонок">
                     <!--  <input type="hidden" name="club" value="<?=$_GET['club-name']?>"> -->
                     <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
-                    <p class="input-text"><input type="tel" name="phone" id="callback_form1-phone" required
-                            placeholder="Ваш номер телефона..."></p>
+                    <p class="input-text"><input type="tel" class="form-phone" name="phone" id="callback_form1-phone"
+                            required placeholder="Ваш номер телефона..."></p>
                     <p class="personal-data">
-                        <input type="checkbox" required id="check"><label for="check">Я согласен на обработку
+                        <input type="checkbox" id="check"><label for="check">Я согласен на обработку
                             <br>персональных
                             данных</label>
 
@@ -554,10 +557,10 @@
                     <h4>Записаться на визит</h4>
                     <input type="hidden" name="form_name" value=" Записаться на визит">
                     <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
-                    <p class="input-text"><input type="tel" name="phone" id="callback_form2-phone" required
-                            placeholder="Ваш номер телефона..."></p>
+                    <p class="input-text"><input type="tel" class="form-phone" name="phone" id="callback_form2-phone"
+                            required placeholder="Ваш номер телефона..."></p>
                     <p class="personal-data">
-                        <input type="checkbox" required id="check2"><label for="check2">Я согласен на обработку
+                        <input type="checkbox" id="check2"><label for="check2">Я согласен на обработку
                             <br>персональных
                             данных</label>
 
@@ -577,7 +580,7 @@
             </div>
             <div class="form-content">
                 <h4>Спасибо!</h4>
-                <p>Ваша заявка отправлена. <br> Мы свяжемся с вами в ближайшее время.</p>
+                <p id="status-text">Ваша заявка отправлена. <br> Мы свяжемся с вами в ближайшее время.</p>
                 <button class="btn close-btn">OK</button>
             </div>
         </div>

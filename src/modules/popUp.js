@@ -5,11 +5,13 @@ const popup = () => {
         callbackForm = document.getElementById('callback_form'),
         fixedGift = document.querySelector('.fixed-gift'),
         gift = document.getElementById('gift'),
+        thanks = document.getElementById('thanks'),
         menuButton = document.querySelector('.menu-button'),
         popupMenu = document.querySelector('.popup-menu'),
         clubSelect = document.querySelector('.club-select'),
         clubsListUl = document.querySelector('.clubs-list>ul'),
-        closeBtn = document.querySelectorAll('.close-form'),
+        closeForm = document.querySelectorAll('.close-form'),
+        closeBtn = document.querySelectorAll('.close-btn'),
         body = document.querySelector('body');
 
     // Отобразить модальное окно free_visit_form
@@ -29,7 +31,7 @@ const popup = () => {
             fixedGift.style.display = 'none';
         });
         // eslint-disable-next-line no-empty
-    } catch {}
+    } catch { }
 
     // Отобразить модальное окно popup-menu
     menuButton.addEventListener('click', () => {
@@ -45,19 +47,21 @@ const popup = () => {
     });
 
     // Закрыть форму при клике на крестик
-    closeBtn.forEach((item) => {
+    closeForm.forEach((item) => {
         item.addEventListener('click', (event) => {
             if (event.target.parentNode.parentNode.parentNode.id === 'free_visit_form') {
                 freeVisitForm.style.display = 'none';
             } else if (event.target.parentNode.parentNode.parentNode.id === 'callback_form') {
                 callbackForm.style.display = 'none';
+            } else if (event.target.parentNode.parentNode.parentNode.id === 'thanks') {
+                thanks.style.display = 'none';
             }
             try {
                 if (event.target.parentNode.parentNode.parentNode.id === 'gift') {
                     gift.style.display = 'none';
                 }
                 // eslint-disable-next-line no-empty
-            } catch {}
+            } catch { }
         });
     });
 
@@ -69,15 +73,20 @@ const popup = () => {
         }
     });
 
-    // Закрыть форму c подарком при клике на кнопку OK
-    try {
-        gift.addEventListener('click', () => {
-            if (event.target.classList.contains('close-btn')) {
-                gift.style.display = 'none';
+    // Закрыть форму при клике на кнопку ОК
+    closeBtn.forEach((item) => {
+        item.addEventListener('click', (event) => {
+            if (event.target.parentNode.parentNode.parentNode.id === 'thanks') {
+                thanks.style.display = 'none';
             }
+            try {
+                if (event.target.parentNode.parentNode.parentNode.id === 'gift') {
+                    gift.style.display = 'none';
+                }
+                // eslint-disable-next-line no-empty
+            } catch { }
         });
-        // eslint-disable-next-line no-empty
-    } catch {}
+    });
 
     //Закрыть меню при клике на крестик, либо пункт меню
     popupMenu.addEventListener('click', () => {
