@@ -36,6 +36,8 @@ const calc = () => {
         const checkPromo = () => {
             if (clubPromo[0].value === 'ТЕЛО2019') {
                 priceTotal.innerText = +priceTotal.innerText - (Math.floor(priceTotal.innerText * 0.3));
+            } else {
+                calculate();
             }
         };
 
@@ -53,9 +55,7 @@ const calc = () => {
         });
 
         // Вызов функции проверки промо-кода, после ввода кода
-        clubPromo[0].addEventListener('input', () => {
-            checkPromo();
-        });
+        clubPromo[0].addEventListener('input', checkPromo);
         // eslint-disable-next-line no-empty
     } catch { }
 };

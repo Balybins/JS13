@@ -141,7 +141,7 @@ class SliderCarousel {
                 filter: none;
             }
             .diploma-slider__prev {
-                left: 25px;
+                left: 15px;
             }
             .diploma-slider__next {
                 right: 25px;
