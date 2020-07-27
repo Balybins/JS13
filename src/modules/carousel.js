@@ -63,6 +63,7 @@ class SliderCarousel {
             .diploma-slider {
                 overflow: hidden;
                 position: relative;
+                padding: 0;
             }
             .diploma-slider__wrap {
                 display: flex;
@@ -141,10 +142,10 @@ class SliderCarousel {
                 filter: none;
             }
             .diploma-slider__prev {
-                left: 15px;
+                left: -30px;
             }
             .diploma-slider__next {
-                right: 25px;
+                right: 10px;
             }
         `;
         document.head.appendChild(style);

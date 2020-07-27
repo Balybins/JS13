@@ -21,7 +21,7 @@ const sendForm = () => {
         body: JSON.stringify(body)
     });
 
-    const sendData = (items) => {
+    const sendData = items => {
         const formData = new FormData(items),
             body = {};
         formData.forEach((value, key) => {

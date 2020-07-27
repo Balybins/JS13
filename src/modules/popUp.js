@@ -47,8 +47,8 @@ const popup = () => {
     });
 
     // Закрыть форму при клике на крестик
-    closeForm.forEach((item) => {
-        item.addEventListener('click', (event) => {
+    closeForm.forEach(item => {
+        item.addEventListener('click', event => {
             if (event.target.parentNode.parentNode.parentNode.id === 'free_visit_form') {
                 freeVisitForm.style.display = 'none';
             } else if (event.target.parentNode.parentNode.parentNode.id === 'callback_form') {
@@ -74,8 +74,8 @@ const popup = () => {
     });
 
     // Закрыть форму при клике на кнопку ОК
-    closeBtn.forEach((item) => {
-        item.addEventListener('click', (event) => {
+    closeBtn.forEach(item => {
+        item.addEventListener('click', event => {
             if (event.target.parentNode.parentNode.parentNode.id === 'thanks') {
                 thanks.style.display = 'none';
             }
