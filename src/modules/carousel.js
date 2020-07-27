@@ -142,10 +142,10 @@ class SliderCarousel {
                 filter: none;
             }
             .diploma-slider__prev {
-                left: -30px;
+                left: 8px;
             }
             .diploma-slider__next {
-                right: 10px;
+                right: 43px;
             }
         `;
         document.head.appendChild(style);
