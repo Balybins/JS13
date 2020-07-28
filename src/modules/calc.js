@@ -35,7 +35,7 @@ const calc = () => {
         // Функция проверки корректного ввода промо-кода
         const checkPromo = () => {
             if (clubPromo[0].value === 'ТЕЛО2019') {
-                priceTotal.innerText = +priceTotal.innerText - (Math.floor(priceTotal.innerText * 0.3));
+                priceTotal.innerText = Math.trunc(+priceTotal.innerText - (priceTotal.innerText * 0.3));
             } else {
                 calculate();
             }
